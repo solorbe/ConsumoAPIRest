@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImgComponent } from './components/img/img.component';
@@ -12,6 +13,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
+// import function to register Swiper custom elements
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import { HighlightDirective } from './directives/highlight.directive';
     NavComponent,
     ReversePipe,
     TimeAgoPipe,
-    HighlightDirective
+    HighlightDirective,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SwiperModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
