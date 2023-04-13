@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Product, CreateProductDTO, UpdateProductDTO } from './../models/product.model';
 
@@ -8,15 +8,30 @@ import { Product, CreateProductDTO, UpdateProductDTO } from './../models/product
 })
 export class ProductsService {
 
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products';
+  private apiUrl = '/api/products';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getAllProducts() {
-    return this.http.get<Product[]>(this.apiUrl);
+  // getAllProducts() {
+  //   return this.http.get<Product[]>(this.apiUrl);
+  // }
+
+  getAllProducts(limit?: number, offset?: number) {
+    let params = new HttpParams();
+    if (limit && offset) {
+      params = params.set('limit', limit);
+      params = params.set('offset', limit);
+    }
+    return this.http.get<Product[]>(this.apiUrl, { params });
   }
+  getProductsByPage(limit: number, offset: number) {
+    return this.http.get<Product[]>(`${this.apiUrl}`, {
+      params: { limit, offset }
+    })
+  }
+
 
   getProduct(id: string) {
     return this.http.get<Product>(`${this.apiUrl}/${id}`)
@@ -28,5 +43,9 @@ export class ProductsService {
 
   update(id: string, dto: UpdateProductDTO) {
     return this.http.put<Product>(`${this.apiUrl}/${id}`, dto);
+  }
+
+  delete(id: string) {
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
 }

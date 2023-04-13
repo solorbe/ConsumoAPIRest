@@ -6,6 +6,7 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
+  <button (click)="loadMore()">Load mora</button>
   <!-- <div class="product-detail" [class.active]="showProductDetail">
     <div>
       <button (click)="toggleProductDetail()">Close</button>
@@ -27,5 +28,6 @@
   </swiper>
   <p>{{ productChosen.description }}</p>
   <button (click)="updateProduct()">editar</button>
+  <button (click)="deleteProduct()">delete</button>
   </div>
 </div>
